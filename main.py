@@ -6,6 +6,7 @@ data_directory = "data"
 output_data = "output_data"
 
 conn = sqlite3.connect("crypto_data.db") # connect to SQLite 3 Database
+cur = conn.cursor()
 
 for i in os.listdir(data_directory):
     if i.endswith(" .csv") and i.startswith("2024"):
@@ -13,8 +14,10 @@ for i in os.listdir(data_directory):
 
     data_new = pd.read_csv(os.path.join(data_directory,i))
 
+    table_name = "table" + os.path.splitext(os.path.basename(i))[0]
+
     data_new.to_sql(
-        f"exchange_{id}",
+        table_name,
         conn,
         index = False,
         if_exists="replace",
