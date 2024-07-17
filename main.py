@@ -67,7 +67,48 @@ for table in tables_names:
 
 
 conn.commit()
-conn.close()
 print("data has transferred into SQL Successfully")
 
+table_names = ["ex1","ex2","ex3","ex4","ex5"] #we need actual names of the tables otherwise it does not work
+join_query = """
+SELECT
+    e1.*,e2.*,e3.*,e4.*,e5.*
+FROM
+    ex1 e1
+JOIN 
+    ex2 e2 ON e1.date = e2.date
+JOIN 
+    ex2 e3 ON e1.date = e3.date
+JOIN 
+    ex2 e4 ON e1.date = e4.date
+JOIN 
+    ex2 e5 ON e1.date = e5.date
+
+
+"""
+# cur.execute(join_query)
+# joined_data  = cur.fetchall()
+#
+# import  csv
+#
+# with open('joined_data.csv','w',newline='') as f:
+#     writer = csv.writer(f)
+#     writer.writerow([i[0] for i in cur.description]) #write headers
+#     writer.writerows(joined_data)
+
+#just because joined data does not work, I will do data analysis for one csv file only
+os.chdir("data")
+df = pd.read_csv("2024-07-14_00_00_06_186018_BTC_rawdata_1.csv")
+summary_stats = df.describe()
+print(summary_stats)
+print(df.columns)
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(10,6))
+plt.plot(df['date'],df['ask_vol1'],label = "exchange 1 by volume")
+plt.xlabel("date")
+plt.ylabel("Volume")
+plt.title("Buy Volume over time")
+plt.legend()
+plt.show()
 
