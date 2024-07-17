@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cruptocurrency data Visualization</title>
+    <script src = "https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+</head>
+<body>
+    <h1>Cruptocurrency data Visualization</h1>
+    <div id = "plot"></div>
+    <script>
+       fetch("/data")
+       .then(response => response.json())
+       .then(data=>{
+       var PlotData = Json.parse(data);
+       Plotly.newPlot("plot",plotData.Data,PlotData.layout);
+       });
+
+      </script>
+
+
+
+
+    </script>
+
+
+</body>
+</html>

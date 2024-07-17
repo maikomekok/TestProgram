@@ -102,6 +102,8 @@ df = pd.read_csv("2024-07-14_00_00_06_186018_BTC_rawdata_1.csv")
 summary_stats = df.describe()
 print(summary_stats)
 print(df.columns)
+selected_data = df[df["bid_prc1"]==59196.27]
+print(selected_data) #added some filters
 import matplotlib.pyplot as plt
 
 plt.figure(figsize=(10,6))
